@@ -1,0 +1,52 @@
+{
+    "Name": "zmmwl",
+    "Password": "825bfa91aa057603174fe7820f14a64a834fe8e7",
+    "Salt": "epxsqdhhgphpvytg",
+    "Email": "zmm@sf.com",
+    "Gravatar": "daffe8f65ff0d5db32c7e79f719863f0",
+    "Workspace": "/private/var/folders/6_/mzx_pf_51w9fm86kk9q_1nwm0000gn/T/workspaces/zmmwl",
+    "Locale": "en_US",
+    "GoFormat": "gofmt",
+    "GoBuildArgsForLinux": "-i",
+    "GoBuildArgsForWindows": "-i",
+    "GoBuildArgsForDarwin": "-i",
+    "FontFamily": "Helvetica",
+    "FontSize": "13px",
+    "Theme": "default",
+    "Keymap": "wide",
+    "Created": 1535127369501290248,
+    "Updated": 1535127369501290248,
+    "Lived": 1535295543061687833,
+    "Editor": {
+        "FontFamily": "Consolas, 'Courier New', monospace",
+        "FontSize": "inherit",
+        "LineHeight": "17px",
+        "Theme": "wide",
+        "TabSize": "4"
+    },
+    "LatestSessionContent": {
+        "fileTree": [
+            "/private/var/folders/6_/mzx_pf_51w9fm86kk9q_1nwm0000gn/T/workspaces/zmm/src",
+            "/private/var/folders/6_/mzx_pf_51w9fm86kk9q_1nwm0000gn/T/workspaces/zmm/src/hello",
+            "/private/var/folders/6_/mzx_pf_51w9fm86kk9q_1nwm0000gn/T/workspaces/zmm/src/web"
+        ],
+        "files": [
+            "/private/var/folders/6_/mzx_pf_51w9fm86kk9q_1nwm0000gn/T/workspaces/zmm/src/hello/test.go"
+        ],
+        "currentFile": "/private/var/folders/6_/mzx_pf_51w9fm86kk9q_1nwm0000gn/T/workspaces/zmm/src/hello/test.go",
+        "layout": {
+            "side": {
+                "state": "normal",
+                "size": 200
+            },
+            "sideRight": {
+                "state": "normal",
+                "size": 200
+            },
+            "bottom": {
+                "state": "normal",
+                "size": 328
+            }
+        }
+    }
+}
