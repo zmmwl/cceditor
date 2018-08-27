@@ -29,7 +29,7 @@ import (
 	"github.com/b3log/wide/log"
 	"github.com/b3log/wide/session"
 	"github.com/b3log/wide/util"
-)
+	)
 
 // Logger.
 var logger = log.NewLogger(os.Stdout)
@@ -94,7 +94,7 @@ func GetFilesHandler(w http.ResponseWriter, r *http.Request) {
 	username := httpSession.Values["username"].(string)
 
 	result := util.NewResult()
-	defer util.RetGzResult(w, r, result)
+	//defer util.RetGzResult(w, r, result)
 
 	userWorkspace := conf.GetUserWorkspace(username)
 	workspaces := filepath.SplitList(userWorkspace)
@@ -136,6 +136,10 @@ func GetFilesHandler(w http.ResponseWriter, r *http.Request) {
 	root.Children = append(root.Children, sdkNode)
 
 	result.Data = root
+
+	w.Header().Set("Content-Type", "application/json")
+
+	json.NewEncoder(w).Encode(result)
 }
 
 // RefreshDirectoryHandler handles request of refresh a directory of file tree.

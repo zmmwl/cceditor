@@ -16,7 +16,7 @@
     "Keymap": "wide",
     "Created": 1533952258443535000,
     "Updated": 1533952258443535000,
-    "Lived": 1535308400043805416,
+    "Lived": 1535317821285500763,
     "Editor": {
         "FontFamily": "Consolas, 'Courier New', monospace",
         "FontSize": "inherit",
@@ -45,7 +45,7 @@
             },
             "bottom": {
                 "state": "normal",
-                "size": 328
+                "size": 316
             }
         }
     }

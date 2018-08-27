@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package main
+package wide
 
 import (
 	"compress/gzip"
@@ -90,6 +90,14 @@ func init() {
 
 	logger.Debug("host ["+runtime.Version()+", "+runtime.GOOS+"_"+runtime.GOARCH+"], cross-compilation ",
 		util.Go.GetCrossPlatforms())
+}
+
+func Start(){
+	runtime.GOMAXPROCS(conf.Wide.MaxProcs)
+
+	initMime()
+	handleSignal()
+
 }
 
 // Main.
@@ -197,8 +205,12 @@ func main() {
 	}
 }
 
+var IndexHandler = indexHandler;
+var StartHandler = startHandler;
+
 // indexHandler handles request of Wide index.
 func indexHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("wanglan indexHandler")
 	if conf.Wide.Context+"/" != r.RequestURI {
 		http.Redirect(w, r, conf.Wide.Context+"/", http.StatusFound)
 
@@ -410,6 +422,29 @@ func handlerGzWrapper(f func(w http.ResponseWriter, r *http.Request)) func(w htt
 	handler = i18nLoad(handler)
 
 	return handler
+}
+
+var HandlerGzWrapper =  handlerGzWrapper;
+
+func HandlerGzWrapperz(f string)func(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("wanglan: HandlerGzWrapper")
+	if f == "IndexHandler" {
+		return handlerGzWrapper(indexHandler)
+	}
+	if f == "LoginHandler" {
+		return handlerGzWrapper(session.LoginHandler)
+	}
+	if f == "IndexHandler" {
+		return handlerGzWrapper(indexHandler)
+	}
+	if f == "IndexHandler" {
+		return handlerGzWrapper(indexHandler)
+	}
+	if f == "IndexHandler" {
+		return handlerGzWrapper(indexHandler)
+	}
+	fmt.Println("wanglan: HandlerGzWrapper error")
+	return nil;
 }
 
 // gzipWrapper wraps the process with response gzip.
