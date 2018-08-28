@@ -94,7 +94,8 @@ func GetFilesHandler(w http.ResponseWriter, r *http.Request) {
 	username := httpSession.Values["username"].(string)
 
 	result := util.NewResult()
-	//defer util.RetGzResult(w, r, result)
+	defer util.RetGzResult(w, r, result)
+	//defer json.NewEncoder(w).Encode(result)
 
 	userWorkspace := conf.GetUserWorkspace(username)
 	workspaces := filepath.SplitList(userWorkspace)
@@ -139,7 +140,7 @@ func GetFilesHandler(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
 
-	json.NewEncoder(w).Encode(result)
+
 }
 
 // RefreshDirectoryHandler handles request of refresh a directory of file tree.
@@ -176,14 +177,14 @@ func RefreshDirectoryHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 // GetFileHandler handles request of opening file by editor.
-func GetFileHandler(w http.ResponseWriter, r *http.Request) {
+func GetFileHandler(w http.ResponseWriter, r *http.Request ) {
 	httpSession, _ := session.HTTPSession.Get(r, "wide-session")
 	if httpSession.IsNew {
 		http.Error(w, "Forbidden", http.StatusForbidden)
 
 		return
 	}
-	//username := httpSession.Values["username"].(string)
+	username := httpSession.Values["username"].(string)
 
 	result := util.NewResult()
 	defer util.RetResult(w, r, result)
@@ -197,13 +198,14 @@ func GetFileHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+
 	path := args["path"].(string)
 
-	//if !util.Go.IsAPI(path) && !session.CanAccess(username, path) {
-	//	http.Error(w, "Forbidden", http.StatusForbidden)
-	//
-	//	return
-	//}
+	if !util.Go.IsAPI(path) && !session.CanAccess(username, path) {
+		http.Error(w, "Forbidden", http.StatusForbidden)
+
+		return
+	}
 
 	size := util.File.GetFileSize(path)
 	if size > 5242880 { // 5M

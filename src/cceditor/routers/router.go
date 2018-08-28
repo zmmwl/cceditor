@@ -7,7 +7,7 @@ import (
 
 func init() {
 	//beego.Router("/", &controllers.MainController{})
-	beego.Router("/cc", &controllers.Cccontroller{}, "*:Index")
+	//beego.Router("/cc", &controllers.Cccontroller{}, "*:Index")
 	beego.Router("/", &controllers.WideHandler{}, "*:IndexHandler")
 
 
@@ -47,4 +47,6 @@ func init() {
 	beego.Router("/login", &controllers.WideHandler{}, "*:LoginHandler")
 	beego.Router("/logout", &controllers.WideHandler{}, "*:LogoutHandler")
 
+
+	//beego.Router("/file", &controllers.TestHandler{}, "*:GetFileHandler")
 }

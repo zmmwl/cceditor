@@ -16,7 +16,7 @@
     "Keymap": "wide",
     "Created": 1533952258443535000,
     "Updated": 1533952258443535000,
-    "Lived": 1535317821285500763,
+    "Lived": 1535371773213651475,
     "Editor": {
         "FontFamily": "Consolas, 'Courier New', monospace",
         "FontSize": "inherit",
@@ -28,10 +28,12 @@
         "fileTree": [
             "/private/var/folders/6_/mzx_pf_51w9fm86kk9q_1nwm0000gn/T/workspaces/zmm/src",
             "/private/var/folders/6_/mzx_pf_51w9fm86kk9q_1nwm0000gn/T/workspaces/zmm/src/hello",
-            "/private/var/folders/6_/mzx_pf_51w9fm86kk9q_1nwm0000gn/T/workspaces/zmm/src/web"
+            "/private/var/folders/6_/mzx_pf_51w9fm86kk9q_1nwm0000gn/T/workspaces/zmm/src/web",
+            "/Users/zmmwl/dev/go/go1.10.3/src/fmt"
         ],
         "files": [
-            "/private/var/folders/6_/mzx_pf_51w9fm86kk9q_1nwm0000gn/T/workspaces/zmm/src/hello/test.go"
+            "/private/var/folders/6_/mzx_pf_51w9fm86kk9q_1nwm0000gn/T/workspaces/zmm/src/hello/test.go",
+            "/Users/zmmwl/dev/go/go1.10.3/src/fmt/print.go"
         ],
         "currentFile": "/private/var/folders/6_/mzx_pf_51w9fm86kk9q_1nwm0000gn/T/workspaces/zmm/src/hello/test.go",
         "layout": {
@@ -45,7 +47,7 @@
             },
             "bottom": {
                 "state": "normal",
-                "size": 316
+                "size": 117
             }
         }
     }

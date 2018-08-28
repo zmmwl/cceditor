@@ -53,7 +53,8 @@ type Lint struct {
 func WSHandler(w http.ResponseWriter, r *http.Request) {
 	sid := r.URL.Query()["sid"][0]
 
-	conn, _ := websocket.Upgrade(w, r, nil, 1024, 1024)
+	conn, err2 := websocket.Upgrade(w, r, nil, 1024, 1024)
+	fmt.Println(err2)
 	wsChan := util.WSChannel{Sid: sid, Conn: conn, Request: r, Time: time.Now()}
 
 	ret := map[string]interface{}{"output": "Ouput initialized", "cmd": "init-output"}

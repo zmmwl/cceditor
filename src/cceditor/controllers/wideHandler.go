@@ -9,6 +9,9 @@ import (
 	"github.com/b3log/wide/file"
 	"github.com/b3log/wide/editor"
 	"github.com/b3log/wide/notification"
+			"fmt"
+	"strings"
+	"io"
 )
 
 type WideHandler struct {
@@ -21,43 +24,43 @@ func init(){
 	wideHandlers = make(map[string]func(w http.ResponseWriter, r *http.Request))
 
 	wideHandlers["IndexHandler"] = wide.HandlerGzWrapper(wide.IndexHandler)
-	wideHandlers["LoginHandler"] = wide.HandlerGzWrapper(session.LoginHandler)
+	wideHandlers["LoginHandler"] = wide.HandlerWrapper(session.LoginHandler)
 
 
-	wideHandlers["StartHandler"] = wide.HandlerGzWrapper(wide.StartHandler)
-	wideHandlers["WSHandler"] = wide.HandlerGzWrapper(session.WSHandler)
-	wideHandlers["SaveContentHandler"] = wide.HandlerGzWrapper(session.SaveContentHandler)
-	wideHandlers["BuildHandler"] = wide.HandlerGzWrapper(output.BuildHandler)
-	wideHandlers["RunHandler"] = wide.HandlerGzWrapper(output.RunHandler)
-	wideHandlers["StopHandler"] = wide.HandlerGzWrapper(output.StopHandler)
-	wideHandlers["GoTestHandler"] = wide.HandlerGzWrapper(output.GoTestHandler)
-	wideHandlers["GoVetHandler"] = wide.HandlerGzWrapper(output.GoVetHandler)
-	wideHandlers["GoGetHandler"] = wide.HandlerGzWrapper(output.GoGetHandler)
-	wideHandlers["GoInstallHandler"] = wide.HandlerGzWrapper(output.GoInstallHandler)
-	wideHandlers["WSHandlerOutput"] = wide.HandlerGzWrapper(output.WSHandler)
-	wideHandlers["CrossCompilationHandler"] = wide.HandlerGzWrapper(output.CrossCompilationHandler)
-	wideHandlers["GetFilesHandler"] = wide.HandlerGzWrapper(file.GetFilesHandler)
-	wideHandlers["RefreshDirectoryHandler"] = wide.HandlerGzWrapper(file.RefreshDirectoryHandler)
-	wideHandlers["GetFileHandler"] = wide.HandlerGzWrapper(file.GetFileHandler)
-	wideHandlers["SaveFileHandler"] = wide.HandlerGzWrapper(file.SaveFileHandler)
-	wideHandlers["NewFileHandler"] = wide.HandlerGzWrapper(file.NewFileHandler)
-	wideHandlers["RemoveFileHandler"] = wide.HandlerGzWrapper(file.RemoveFileHandler)
-	wideHandlers["RenameFileHandler"] = wide.HandlerGzWrapper(file.RenameFileHandler)
-	wideHandlers["SearchTextHandler"] = wide.HandlerGzWrapper(file.SearchTextHandler)
-	wideHandlers["FindHandler"] = wide.HandlerGzWrapper(file.FindHandler)
-	wideHandlers["GetOutlineHandler"] = wide.HandlerGzWrapper(file.GetOutlineHandler)
-	wideHandlers["CreateZipHandler"] = wide.HandlerGzWrapper(file.CreateZipHandler)
-	wideHandlers["GetZipHandler"] = wide.HandlerGzWrapper(file.GetZipHandler)
-	wideHandlers["UploadHandler"] = wide.HandlerGzWrapper(file.UploadHandler)
-	wideHandlers["DecompressHandler"] = wide.HandlerGzWrapper(file.DecompressHandler)
-	wideHandlers["WSHandlerEditor"] = wide.HandlerGzWrapper(editor.WSHandler)
-	wideHandlers["GoFmtHandler"] = wide.HandlerGzWrapper(editor.GoFmtHandler)
-	wideHandlers["AutocompleteHandler"] = wide.HandlerGzWrapper(editor.AutocompleteHandler)
-	wideHandlers["GetExprInfoHandler"] = wide.HandlerGzWrapper(editor.GetExprInfoHandler)
-	wideHandlers["FindDeclarationHandler"] = wide.HandlerGzWrapper(editor.FindDeclarationHandler)
-	wideHandlers["FindUsagesHandler"] = wide.HandlerGzWrapper(editor.FindUsagesHandler)
-	wideHandlers["WSHandlerNotify"] = wide.HandlerGzWrapper(notification.WSHandler)
-	wideHandlers["LogoutHandler"] = wide.HandlerGzWrapper(session.LogoutHandler)
+	wideHandlers["StartHandler"] = wide.HandlerWrapper(wide.StartHandler)
+	wideHandlers["WSHandler"] = wide.HandlerWrapper(session.WSHandler)
+	wideHandlers["SaveContentHandler"] = wide.HandlerWrapper(session.SaveContentHandler)
+	wideHandlers["BuildHandler"] = wide.HandlerWrapper(output.BuildHandler)
+	wideHandlers["RunHandler"] = wide.HandlerWrapper(output.RunHandler)
+	wideHandlers["StopHandler"] = wide.HandlerWrapper(output.StopHandler)
+	wideHandlers["GoTestHandler"] = wide.HandlerWrapper(output.GoTestHandler)
+	wideHandlers["GoVetHandler"] = wide.HandlerWrapper(output.GoVetHandler)
+	wideHandlers["GoGetHandler"] = wide.HandlerWrapper(output.GoGetHandler)
+	wideHandlers["GoInstallHandler"] = wide.HandlerWrapper(output.GoInstallHandler)
+	wideHandlers["WSHandlerOutput"] = wide.HandlerWrapper(output.WSHandler)
+	wideHandlers["CrossCompilationHandler"] = wide.HandlerWrapper(output.CrossCompilationHandler)
+	wideHandlers["GetFilesHandler"] = wide.HandlerWrapper(file.GetFilesHandler)
+	wideHandlers["RefreshDirectoryHandler"] = wide.HandlerWrapper(file.RefreshDirectoryHandler)
+	wideHandlers["GetFileHandler"] = wide.HandlerWrapper(file.GetFileHandler)
+	wideHandlers["SaveFileHandler"] = wide.HandlerWrapper(file.SaveFileHandler)
+	wideHandlers["NewFileHandler"] = wide.HandlerWrapper(file.NewFileHandler)
+	wideHandlers["RemoveFileHandler"] = wide.HandlerWrapper(file.RemoveFileHandler)
+	wideHandlers["RenameFileHandler"] = wide.HandlerWrapper(file.RenameFileHandler)
+	wideHandlers["SearchTextHandler"] = wide.HandlerWrapper(file.SearchTextHandler)
+	wideHandlers["FindHandler"] = wide.HandlerWrapper(file.FindHandler)
+	wideHandlers["GetOutlineHandler"] = wide.HandlerWrapper(file.GetOutlineHandler)
+	wideHandlers["CreateZipHandler"] = wide.HandlerWrapper(file.CreateZipHandler)
+	wideHandlers["GetZipHandler"] = wide.HandlerWrapper(file.GetZipHandler)
+	wideHandlers["UploadHandler"] = wide.HandlerWrapper(file.UploadHandler)
+	wideHandlers["DecompressHandler"] = wide.HandlerWrapper(file.DecompressHandler)
+	wideHandlers["WSHandlerEditor"] = wide.HandlerWrapper(editor.WSHandler)
+	wideHandlers["GoFmtHandler"] = wide.HandlerWrapper(editor.GoFmtHandler)
+	wideHandlers["AutocompleteHandler"] = wide.HandlerWrapper(editor.AutocompleteHandler)
+	wideHandlers["GetExprInfoHandler"] = wide.HandlerWrapper(editor.GetExprInfoHandler)
+	wideHandlers["FindDeclarationHandler"] = wide.HandlerWrapper(editor.FindDeclarationHandler)
+	wideHandlers["FindUsagesHandler"] = wide.HandlerWrapper(editor.FindUsagesHandler)
+	wideHandlers["WSHandlerNotify"] = wide.HandlerWrapper(notification.WSHandler)
+	wideHandlers["LogoutHandler"] = wide.HandlerWrapper(session.LogoutHandler)
 }
 
 
@@ -197,7 +200,33 @@ func (c *WideHandler) SaveFileHandler() {
 	handle("SaveFileHandler",c)
 }
 
+type myReadCloser struct{
+	io.Reader
+	io.Closer
+}
+func (mrc *myReadCloser)Close() error{
+	fmt.Println("do nothing")
+	return nil;
+}
+
+type myCloser struct{
+}
+
+func (my *myCloser) Close() error{
+	return nil
+}
+
+
 func handle(handlerName string, c *WideHandler){
-	wideHandlers[handlerName](c.Ctx.ResponseWriter.ResponseWriter, c.Ctx.Request)
+	switch handlerName{
+	case "WSHandlerOutput","WSHandler","WSHandlerNotify","WSHandlerEditor": //do nothing
+	default:
+		sReader := strings.NewReader(string(c.Ctx.Input.RequestBody))
+		mr := &myReadCloser{sReader,&myCloser{}};
+		c.Ctx.Request.Body = mr;
+	}
+
+	wideHandlers[handlerName](c.Ctx.ResponseWriter, c.Ctx.Request)
+
 	c.TplName = "empty.html"
 }

@@ -425,6 +425,7 @@ func handlerGzWrapper(f func(w http.ResponseWriter, r *http.Request)) func(w htt
 }
 
 var HandlerGzWrapper =  handlerGzWrapper;
+var HandlerWrapper =  handlerWrapper;
 
 func HandlerGzWrapperz(f string)func(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("wanglan: HandlerGzWrapper")
